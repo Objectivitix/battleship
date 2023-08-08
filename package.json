@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "test:verbose": "jest --verbose",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "pretty": "prettier --write .",
