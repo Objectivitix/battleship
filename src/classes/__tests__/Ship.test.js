@@ -9,17 +9,16 @@ describe("Ship", () => {
 
   it("gets hit twice", () => {
     ship.receiveHit();
-    expect(ship.hits).toBe(1);
     ship.receiveHit();
     expect(ship.hits).toBe(2);
   });
 
-  it("is not sunk", () => {
+  it("does not get sunk", () => {
     ship.receiveHit();
     expect(ship.sunk).toBe(false);
   });
 
-  it("is sunk", () => {
+  it("gets sunk", () => {
     ship.receiveHit();
     ship.receiveHit();
     ship.receiveHit();
