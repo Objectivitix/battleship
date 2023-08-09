@@ -7,7 +7,7 @@ export default class Player {
   }
 
   attack(validCoords) {
-    this.enemyWaters.receiveAttack(validCoords);
+    return this.enemyWaters.receiveAttack(validCoords);
   }
 
   placeNewShip(length, [startY, startX], vertical) {

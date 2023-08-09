@@ -28,15 +28,9 @@ describe("Board", () => {
     ]);
   });
 
-  it("records received attacks", () => {
+  it("deletes received attacks' coords from available", () => {
     board.receiveAttack([4, 0]);
-    board.receiveAttack([4, 1]);
-    board.receiveAttack([4, 2]);
-    expect(board.attacked).toEqual([
-      [4, 0],
-      [4, 1],
-      [4, 2],
-    ]);
+    expect(board.pending).not.toContainEqual([4, 0]);
   });
 
   it("populates ships array", () => {
@@ -84,5 +78,10 @@ describe("Board", () => {
     board.receiveAttack([1, 1]);
     board.receiveAttack([1, 2]);
     expect(ship2.receiveHit).toHaveBeenCalledTimes(2);
+  });
+
+  it("returns whether attack was successful", () => {
+    expect(board.receiveAttack([1, 1])).toBe(true);
+    expect(board.receiveAttack([2, 2])).toBe(false);
   });
 });

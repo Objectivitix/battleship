@@ -1,14 +1,18 @@
-import _ from "lodash";
-
-function isEqual(target) {
-  return (element) => _.isEqual(element, target);
-}
+import isEqual from "../lib/isEqual";
+import isNotEqual from "../lib/isNotEqual";
 
 export default class Board {
   constructor() {
     this.ships = [];
     this.locations = new Map();
-    this.attacked = [];
+
+    this.pending = [];
+
+    for (let y = 0; y < 10; y += 1) {
+      for (let x = 0; x < 10; x += 1) {
+        this.pending.push([y, x]);
+      }
+    }
   }
 
   get allSunk() {
@@ -29,12 +33,16 @@ export default class Board {
   }
 
   receiveAttack(target) {
-    this.attacked.push(target);
+    let hit = false;
+    this.pending = this.pending.filter(isNotEqual(target));
 
     this.locations.forEach((ship, coordsArr) => {
       if (coordsArr.some(isEqual(target))) {
+        hit = true;
         ship.receiveHit();
       }
     });
+
+    return hit;
   }
 }

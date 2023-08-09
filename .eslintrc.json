@@ -17,6 +17,7 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-constant-condition": "off",
     "quotes": ["error", "double"],
     "import/no-extraneous-dependencies": [
       "error",
