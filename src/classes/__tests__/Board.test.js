@@ -65,6 +65,21 @@ describe("Board", () => {
     );
   });
 
+  it("records occupied coords", () => {
+    expect(board.occupied).toEqual([
+      [0, 0],
+      [0, 1],
+      [1, 0],
+      [1, 1],
+      [1, 2],
+    ]);
+  });
+
+  it("checks if coords are available", () => {
+    expect(board.isAvailable([0, 0])).toBe(false);
+    expect(board.isAvailable([1, 3])).toBe(true);
+  });
+
   it("calls receiveHit of ship if shot", () => {
     board.receiveAttack([1, 1]);
     board.receiveAttack([1, 2]);
