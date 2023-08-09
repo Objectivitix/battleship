@@ -1,5 +1,4 @@
+import game from "./game";
 import "./styles.css";
 
-export default function hello() {
-  return "Hello, Jest+Webpack!";
-}
+game().then((winner) => console.log(`Player ${winner.name} wins!`));
