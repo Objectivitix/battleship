@@ -23,12 +23,8 @@ export default class Board {
     return Array.from(this.locations.keys()).flat();
   }
 
-  isAvailable(target) {
-    return !containsEqual(this.occupied, target);
-  }
-
-  isAvailableArr(targets) {
-    return targets.every((target) => this.isAvailable(target));
+  isAvailable(targets) {
+    return targets.every((target) => !containsEqual(this.occupied, target));
   }
 
   placeShip(ship, coordsArr) {

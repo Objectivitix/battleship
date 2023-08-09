@@ -9,9 +9,9 @@ let ship1;
 let ship2;
 
 beforeEach(() => {
-  board = new Board();
-
   Ship.mockClear();
+
+  board = new Board();
 
   ship1 = new Ship(2);
   ship2 = new Ship(3);
@@ -66,14 +66,14 @@ describe("ships: Board", () => {
 
   it("checks if coords are free for new ship", () => {
     expect(
-      board.isAvailableArr([
+      board.isAvailable([
         [0, 0],
         [0, 1],
         [0, 2],
       ]),
     ).toBe(false);
     expect(
-      board.isAvailableArr([
+      board.isAvailable([
         [2, 0],
         [2, 1],
         [2, 2],

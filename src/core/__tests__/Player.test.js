@@ -7,6 +7,8 @@ describe("Player", () => {
   let player;
 
   beforeEach(() => {
+    Board.mockClear();
+
     player = new Player(undefined, new Board(), new Board());
   });
 
