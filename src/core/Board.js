@@ -1,4 +1,4 @@
-import isEqual from "../lib/isEqual";
+import containsEqual from "../lib/containsEqual";
 import isNotEqual from "../lib/isNotEqual";
 
 export default class Board {
@@ -24,7 +24,7 @@ export default class Board {
   }
 
   isAvailable(target) {
-    return !this.occupied.some(isEqual(target));
+    return !containsEqual(this.occupied, target);
   }
 
   isAvailableArr(targets) {
@@ -41,7 +41,7 @@ export default class Board {
     this.pending = this.pending.filter(isNotEqual(target));
 
     this.locations.forEach((ship, coordsArr) => {
-      if (coordsArr.some(isEqual(target))) {
+      if (containsEqual(coordsArr, target)) {
         hit = true;
         ship.receiveHit();
       }
