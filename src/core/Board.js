@@ -27,6 +27,10 @@ export default class Board {
     return !this.occupied.some(isEqual(target));
   }
 
+  isAvailableArr(targets) {
+    return targets.every((target) => this.isAvailable(target));
+  }
+
   placeShip(ship, coordsArr) {
     this.ships.push(ship);
     this.locations.set(coordsArr, ship);

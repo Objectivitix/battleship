@@ -4,7 +4,7 @@ describe("Bot", () => {
   let bot;
 
   beforeEach(() => {
-    bot = new Bot(undefined, {
+    bot = new Bot(undefined, undefined, {
       pending: [
         [0, 0],
         [0, 1],

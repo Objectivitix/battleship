@@ -3,36 +3,31 @@ import Ship from "../Ship";
 
 jest.mock("../Ship");
 
-describe("Board", () => {
-  let board;
+let board;
 
-  let ship1;
-  let ship2;
+let ship1;
+let ship2;
 
-  beforeEach(() => {
-    board = new Board();
+beforeEach(() => {
+  board = new Board();
 
-    Ship.mockClear();
+  Ship.mockClear();
 
-    ship1 = new Ship(2);
-    ship2 = new Ship(3);
+  ship1 = new Ship(2);
+  ship2 = new Ship(3);
 
-    board.placeShip(ship1, [
-      [0, 0],
-      [0, 1],
-    ]);
-    board.placeShip(ship2, [
-      [1, 0],
-      [1, 1],
-      [1, 2],
-    ]);
-  });
+  board.placeShip(ship1, [
+    [0, 0],
+    [0, 1],
+  ]);
+  board.placeShip(ship2, [
+    [1, 0],
+    [1, 1],
+    [1, 2],
+  ]);
+});
 
-  it("deletes received attacks' coords from available", () => {
-    board.receiveAttack([4, 0]);
-    expect(board.pending).not.toContainEqual([4, 0]);
-  });
-
+describe("ships: Board", () => {
   it("populates ships array", () => {
     expect(board.ships).toEqual([ship1, ship2]);
   });
@@ -69,19 +64,38 @@ describe("Board", () => {
     ]);
   });
 
-  it("checks if coords are available", () => {
-    expect(board.isAvailable([0, 0])).toBe(false);
-    expect(board.isAvailable([1, 3])).toBe(true);
+  it("checks if coords are free for new ship", () => {
+    expect(
+      board.isAvailableArr([
+        [0, 0],
+        [0, 1],
+        [0, 2],
+      ]),
+    ).toBe(false);
+    expect(
+      board.isAvailableArr([
+        [2, 0],
+        [2, 1],
+        [2, 2],
+      ]),
+    ).toBe(true);
+  });
+});
+
+describe("attacks: Board", () => {
+  it("deletes received attacks' coords from pending", () => {
+    board.receiveAttack([4, 0]);
+    expect(board.pending).not.toContainEqual([4, 0]);
+  });
+
+  it("returns whether attack was successful", () => {
+    expect(board.receiveAttack([1, 1])).toBe(true);
+    expect(board.receiveAttack([2, 2])).toBe(false);
   });
 
   it("calls receiveHit of ship if shot", () => {
     board.receiveAttack([1, 1]);
     board.receiveAttack([1, 2]);
     expect(ship2.receiveHit).toHaveBeenCalledTimes(2);
-  });
-
-  it("returns whether attack was successful", () => {
-    expect(board.receiveAttack([1, 1])).toBe(true);
-    expect(board.receiveAttack([2, 2])).toBe(false);
   });
 });

@@ -1,7 +1,8 @@
 import Ship from "./Ship";
 
 export default class Player {
-  constructor(waters, enemyWaters) {
+  constructor(name, waters, enemyWaters) {
+    this.name = name;
     this.waters = waters;
     this.enemyWaters = enemyWaters;
   }
