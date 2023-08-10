@@ -1,14 +1,23 @@
-const BUTTON = document.querySelector("button");
+import { containsEqual } from "../lib/equality";
 
-export default async function getHumanMove(player) {
-  return JSON.parse(prompt("coords:"));
-  // return new Promise((resolve) => {
-  //   BUTTON.addEventListener(
-  //     "click",
-  //     () => {
-  //       resolve([0, 1]);
-  //     },
-  //     { once: true },
-  //   );
-  // });
+let cells;
+let initalized = false;
+
+export default async function getHumanMove(possibleMoves) {
+  if (!initalized) {
+    cells = document.querySelectorAll(".grid__cell");
+    initalized = true;
+  }
+
+  return new Promise((resolve) => {
+    cells.forEach((cell) => {
+      const coords = JSON.parse(cell.dataset.coords);
+
+      if (!containsEqual(possibleMoves, coords)) {
+        return;
+      }
+
+      cell.addEventListener("click", () => resolve(coords), { once: true });
+    });
+  });
 }

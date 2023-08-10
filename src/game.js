@@ -4,29 +4,31 @@ import Board from "./core/Board";
 import Bot from "./core/Bot";
 import Player from "./core/Player";
 import getHumanMove from "./dom/humanMove";
+import initDocument from "./dom/initialize";
 
 async function getNextMove(player) {
   if (player instanceof Bot) {
     return player.makeNextMove();
   }
 
-  return getHumanMove(player);
+  return getHumanMove(player.enemyWaters.pending);
 }
 
 export default async function game() {
+  initDocument();
+
   const boardOne = new Board();
   const boardTwo = new Board();
 
-  const playerOne = new Bot("1", boardOne, boardTwo);
+  const playerOne = new Player("1", boardOne, boardTwo);
   const playerTwo = new Bot("2", boardTwo, boardOne);
 
-  // playerOne.placeNewShip(5, [0, 0], false);
-  // playerOne.placeNewShip(4, [1, 0], false);
-  // playerOne.placeNewShip(3, [2, 0], false);
-  // playerOne.placeNewShip(3, [3, 0], false);
-  // playerOne.placeNewShip(2, [4, 0], false);
+  playerOne.placeNewShip(5, [0, 0], false);
+  playerOne.placeNewShip(4, [1, 0], false);
+  playerOne.placeNewShip(3, [2, 0], false);
+  playerOne.placeNewShip(3, [3, 0], false);
+  playerOne.placeNewShip(2, [4, 0], false);
 
-  playerOne.arrangeFleet([5, 4, 3, 3, 2]);
   playerTwo.arrangeFleet([5, 4, 3, 3, 2]);
 
   let playerOneActive = true;
@@ -36,6 +38,12 @@ export default async function game() {
 
     const coords = await getNextMove(activePlayer);
     const hit = activePlayer.attack(coords);
+
+    console.log(
+      `Player ${activePlayer.name} fires at ${coords}, and it's a ${
+        hit ? "hit" : "miss"
+      }!`,
+    );
 
     if (hit && activePlayer.enemyWaters.allSunk) {
       return activePlayer;
