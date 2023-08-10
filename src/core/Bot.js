@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 import Player from "./Player";
-import containsEqual from "../lib/containsEqual";
+import { removeMultiple } from "../lib/equality";
 
 export default class Bot extends Player {
   arrangeFleet(lengths) {
@@ -24,9 +24,7 @@ export default class Bot extends Player {
         coordsArr = Player.calcCoordsArr(length, start, vertical);
       } while (!this.waters.isAvailable(coordsArr));
 
-      available = available.filter(
-        (coords) => !containsEqual(coordsArr, coords),
-      );
+      available = removeMultiple(available, coordsArr);
 
       this.placeNewShip(length, start, vertical);
     });

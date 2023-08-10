@@ -1,5 +1,4 @@
-import containsEqual from "../lib/containsEqual";
-import isNotEqual from "../lib/isNotEqual";
+import { containsEqual, remove } from "../lib/equality";
 
 export default class Board {
   constructor() {
@@ -34,7 +33,7 @@ export default class Board {
 
   receiveAttack(target) {
     let hit = false;
-    this.pending = this.pending.filter(isNotEqual(target));
+    this.pending = remove(this.pending, target);
 
     this.locations.forEach((ship, coordsArr) => {
       if (containsEqual(coordsArr, target)) {
