@@ -22,7 +22,7 @@ export default class Bot extends Player {
       do {
         start = _.sample(available);
         coordsArr = Player.calcCoordsArr(length, start, vertical);
-      } while (!this.waters.isAvailable(coordsArr));
+      } while (!this.waters.isValid(coordsArr));
 
       available = removeMultiple(available, coordsArr);
 

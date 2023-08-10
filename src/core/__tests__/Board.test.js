@@ -64,16 +64,23 @@ describe("ships: Board", () => {
     ]);
   });
 
-  it("checks if coords are free for new ship", () => {
+  it("checks if coords are free & in bounds for new ship", () => {
     expect(
-      board.isAvailable([
+      board.isValid([
         [0, 0],
         [0, 1],
         [0, 2],
       ]),
     ).toBe(false);
     expect(
-      board.isAvailable([
+      board.isValid([
+        [9, 0],
+        [10, 0],
+        [11, 0],
+      ]),
+    ).toBe(false);
+    expect(
+      board.isValid([
         [2, 0],
         [2, 1],
         [2, 2],

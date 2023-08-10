@@ -17,11 +17,17 @@ export default async function game() {
   const boardOne = new Board();
   const boardTwo = new Board();
 
-  const playerOne = new Player("1", boardOne, boardTwo);
+  const playerOne = new Bot("1", boardOne, boardTwo);
   const playerTwo = new Bot("2", boardTwo, boardOne);
 
-  playerOne.placeNewShip(3, [0, 0], false);
-  playerTwo.placeNewShip(3, [0, 0], false);
+  // playerOne.placeNewShip(5, [0, 0], false);
+  // playerOne.placeNewShip(4, [1, 0], false);
+  // playerOne.placeNewShip(3, [2, 0], false);
+  // playerOne.placeNewShip(3, [3, 0], false);
+  // playerOne.placeNewShip(2, [4, 0], false);
+
+  playerOne.arrangeFleet([5, 4, 3, 3, 2]);
+  playerTwo.arrangeFleet([5, 4, 3, 3, 2]);
 
   let playerOneActive = true;
 

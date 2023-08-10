@@ -24,7 +24,7 @@ describe("Bot", () => {
   });
 
   it("arranges fleet randomly", () => {
-    bot.waters.isAvailable.mockReturnValue(true);
+    bot.waters.isValid.mockReturnValue(true);
 
     bot.arrangeFleet([5, 4, 3, 3, 2]);
 
@@ -34,6 +34,6 @@ describe("Bot", () => {
       expect.arrayContaining([[expect.any(Number), expect.any(Number)]]),
     );
 
-    expect(bot.waters.isAvailable).toHaveBeenCalled();
+    expect(bot.waters.isValid).toHaveBeenCalled();
   });
 });

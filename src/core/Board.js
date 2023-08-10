@@ -22,8 +22,15 @@ export default class Board {
     return Array.from(this.locations.keys()).flat();
   }
 
-  isAvailable(targets) {
-    return targets.every((target) => !containsEqual(this.occupied, target));
+  static isInBounds([y, x]) {
+    return 0 <= y && y < 10 && 0 <= x && x < 10;
+  }
+
+  isValid(targets) {
+    return targets.every(
+      (target) =>
+        Board.isInBounds(target) && !containsEqual(this.occupied, target),
+    );
   }
 
   placeShip(ship, coordsArr) {
