@@ -9,7 +9,7 @@ describe("Bot", () => {
   beforeEach(() => {
     Board.mockClear();
 
-    bot = new Bot(undefined, new Board(), {
+    bot = new Bot(new Board(), {
       pending: [
         [0, 0],
         [0, 1],

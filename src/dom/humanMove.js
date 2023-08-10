@@ -1,13 +1,9 @@
 import { containsEqual } from "../lib/equality";
 
-let cells;
-let initalized = false;
-
-export default async function getHumanMove(possibleMoves) {
-  if (!initalized) {
-    cells = document.querySelectorAll(".grid__cell");
-    initalized = true;
-  }
+export default async function getHumanMove(one, possibleMoves) {
+  const cells = document.querySelectorAll(
+    `.grid--${one ? "two" : "one"} > .grid__cell`,
+  );
 
   return new Promise((resolve) => {
     cells.forEach((cell) => {

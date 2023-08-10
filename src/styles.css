@@ -64,6 +64,11 @@ button {
 
 /* LOLZ */
 
+.game {
+  display: flex;
+  gap: 2rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -85,4 +90,20 @@ button {
 
 .grid__cell:nth-child(10n + 1) {
   border-left-width: 1px;
+}
+
+.grid__cell--attacked {
+  background-color: lightgray;
+}
+
+.grid__cell--hit {
+  background-color: lightcoral;
+}
+
+.winner {
+  position: absolute;
+  left: 50%;
+  bottom: calc(25vmin - 7vh);
+  transform: translateX(-50%);
+  font-size: var(--fs-800);
 }

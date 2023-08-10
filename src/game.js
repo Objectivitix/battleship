@@ -5,13 +5,14 @@ import Bot from "./core/Bot";
 import Player from "./core/Player";
 import getHumanMove from "./dom/humanMove";
 import initDocument from "./dom/initialize";
+import { updateCell } from "./dom/states";
 
 async function getNextMove(player) {
   if (player instanceof Bot) {
     return player.makeNextMove();
   }
 
-  return getHumanMove(player.enemyWaters.pending);
+  return getHumanMove(player.one, player.enemyWaters.pending);
 }
 
 export default async function game() {
@@ -20,8 +21,8 @@ export default async function game() {
   const boardOne = new Board();
   const boardTwo = new Board();
 
-  const playerOne = new Player("1", boardOne, boardTwo);
-  const playerTwo = new Bot("2", boardTwo, boardOne);
+  const playerOne = new Player(boardOne, boardTwo, true);
+  const playerTwo = new Bot(boardTwo, boardOne, false);
 
   playerOne.placeNewShip(5, [0, 0], false);
   playerOne.placeNewShip(4, [1, 0], false);
@@ -39,11 +40,7 @@ export default async function game() {
     const coords = await getNextMove(activePlayer);
     const hit = activePlayer.attack(coords);
 
-    console.log(
-      `Player ${activePlayer.name} fires at ${coords}, and it's a ${
-        hit ? "hit" : "miss"
-      }!`,
-    );
+    updateCell(activePlayer.one, coords, hit);
 
     if (hit && activePlayer.enemyWaters.allSunk) {
       return activePlayer;

@@ -1,6 +1,6 @@
-const grid = document.querySelector(".grid");
+const grids = document.querySelectorAll(".grid");
 
-function populateGrid() {
+function populateGrid(grid) {
   for (let y = 0; y < 10; y += 1) {
     for (let x = 0; x < 10; x += 1) {
       const cell = document.createElement("div");
@@ -12,6 +12,10 @@ function populateGrid() {
   }
 }
 
+function populateGrids() {
+  grids.forEach(populateGrid);
+}
+
 export default function initDocument() {
-  populateGrid();
+  populateGrids();
 }

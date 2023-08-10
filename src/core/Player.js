@@ -1,10 +1,10 @@
 import Ship from "./Ship";
 
 export default class Player {
-  constructor(name, waters, enemyWaters) {
-    this.name = name;
+  constructor(waters, enemyWaters, one) {
     this.waters = waters;
     this.enemyWaters = enemyWaters;
+    this.one = one;
   }
 
   static calcCoordsArr(length, [startY, startX], vertical) {

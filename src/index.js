@@ -1,4 +1,8 @@
 import game from "./game";
 import "./styles.css";
 
-game().then((winner) => console.log(`Player ${winner.name} wins!`));
+const para = document.querySelector(".winner");
+
+game().then((winner) => {
+  para.textContent = `Player ${winner.one ? "1" : "2"} wins!`;
+});

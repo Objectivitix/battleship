@@ -9,7 +9,7 @@ describe("Player", () => {
   beforeEach(() => {
     Board.mockClear();
 
-    player = new Player(undefined, new Board(), new Board());
+    player = new Player(new Board(), new Board());
   });
 
   it("attacks enemy waters", () => {
