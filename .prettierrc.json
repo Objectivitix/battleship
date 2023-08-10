@@ -1,4 +1,7 @@
 {
+  "importOrder": ["lib", "dom", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
   "overrides": [
     {
       "files": "*.html",
@@ -7,5 +10,6 @@
       }
     }
   ],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "trailingComma": "all"
 }

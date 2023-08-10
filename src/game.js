@@ -1,11 +1,11 @@
 /* eslint no-await-in-loop: 0 */
+import getHumanMove from "./dom/humanMove";
+import initDocument from "./dom/initialize";
+import { updateCell } from "./dom/states";
 
 import Board from "./core/Board";
 import Bot from "./core/Bot";
 import Player from "./core/Player";
-import getHumanMove from "./dom/humanMove";
-import initDocument from "./dom/initialize";
-import { updateCell } from "./dom/states";
 
 async function getNextMove(player) {
   if (player instanceof Bot) {

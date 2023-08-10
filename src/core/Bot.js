@@ -1,7 +1,8 @@
 import _ from "lodash";
 
-import Player from "./Player";
 import { removeMultiple } from "../lib/equality";
+
+import Player from "./Player";
 
 export default class Bot extends Player {
   arrangeFleet(lengths) {
