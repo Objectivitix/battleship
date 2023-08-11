@@ -1,5 +1,5 @@
 {
-  "importOrder": ["lib", "dom", "^[./]"],
+  "importOrder": ["constants", "lib", "dom", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "overrides": [

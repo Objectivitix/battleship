@@ -1,5 +1,7 @@
 import _ from "lodash";
 
+import { BOARD_SL } from "../constants";
+
 import { removeMultiple } from "../lib/equality";
 
 import Player from "./Player";
@@ -8,8 +10,8 @@ export default class Bot extends Player {
   setShipsRandom(lengths) {
     let available = [];
 
-    for (let y = 0; y < 10; y += 1) {
-      for (let x = 0; x < 10; x += 1) {
+    for (let y = 0; y < BOARD_SL; y += 1) {
+      for (let x = 0; x < BOARD_SL; x += 1) {
         available.push([y, x]);
       }
     }

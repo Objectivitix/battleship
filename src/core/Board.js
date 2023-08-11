@@ -1,3 +1,5 @@
+import { BOARD_SL } from "../constants";
+
 import { containsEqual, remove } from "../lib/equality";
 
 export default class Board {
@@ -7,8 +9,8 @@ export default class Board {
 
     this.pending = [];
 
-    for (let y = 0; y < 10; y += 1) {
-      for (let x = 0; x < 10; x += 1) {
+    for (let y = 0; y < BOARD_SL; y += 1) {
+      for (let x = 0; x < BOARD_SL; x += 1) {
         this.pending.push([y, x]);
       }
     }
@@ -23,7 +25,7 @@ export default class Board {
   }
 
   static isInBounds([y, x]) {
-    return 0 <= y && y < 10 && 0 <= x && x < 10;
+    return 0 <= y && y < BOARD_SL && 0 <= x && x < BOARD_SL;
   }
 
   isValid(targets) {
