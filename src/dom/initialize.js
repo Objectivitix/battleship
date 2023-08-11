@@ -1,3 +1,4 @@
+const arrangeModal = document.querySelector(".arrange");
 const grids = document.querySelectorAll(".grid");
 
 function populateGrid(grid) {
@@ -18,4 +19,9 @@ function populateGrids() {
 
 export default function initDocument() {
   populateGrids();
+
+  // Disallow dismissal of arrange fleet input using ESC key
+  arrangeModal.addEventListener("cancel", (evt) => {
+    evt.preventDefault();
+  });
 }

@@ -5,7 +5,7 @@ import { removeMultiple } from "../lib/equality";
 import Player from "./Player";
 
 export default class Bot extends Player {
-  arrangeFleet(lengths) {
+  setShipsRandom(lengths) {
     let available = [];
 
     for (let y = 0; y < 10; y += 1) {
@@ -27,7 +27,7 @@ export default class Bot extends Player {
 
       available = removeMultiple(available, coordsArr);
 
-      this.placeNewShip(length, start, vertical);
+      this.setShip(length, start, vertical);
     });
   }
 

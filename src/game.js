@@ -1,6 +1,6 @@
 /* eslint no-await-in-loop: 0 */
-import getHumanMove from "./dom/humanMove";
 import initDocument from "./dom/initialize";
+import { arrangeHumanFleet, getHumanMove } from "./dom/input";
 import { updateCell } from "./dom/states";
 
 import Board from "./core/Board";
@@ -15,6 +15,15 @@ async function getNextMove(player) {
   return getHumanMove(player.one, player.enemyWaters.pending);
 }
 
+async function arrangeFleet(player) {
+  if (player instanceof Bot) {
+    player.setShipsRandom([5, 4, 3, 3, 2]);
+    return;
+  }
+
+  arrangeHumanFleet(player);
+}
+
 export default async function game() {
   initDocument();
 
@@ -24,13 +33,8 @@ export default async function game() {
   const playerOne = new Player(boardOne, boardTwo, true);
   const playerTwo = new Bot(boardTwo, boardOne, false);
 
-  playerOne.placeNewShip(5, [0, 0], false);
-  playerOne.placeNewShip(4, [1, 0], false);
-  playerOne.placeNewShip(3, [2, 0], false);
-  playerOne.placeNewShip(3, [3, 0], false);
-  playerOne.placeNewShip(2, [4, 0], false);
-
-  playerTwo.arrangeFleet([5, 4, 3, 3, 2]);
+  await arrangeFleet(playerOne);
+  await arrangeFleet(playerTwo);
 
   let playerOneActive = true;
 

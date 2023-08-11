@@ -21,7 +21,7 @@ export default class Player {
     return this.enemyWaters.receiveAttack(validCoords);
   }
 
-  placeNewShip(length, [startY, startX], vertical) {
+  setShip(length, [startY, startX], vertical) {
     const ship = new Ship(length);
     const coordsArr = Player.calcCoordsArr(length, [startY, startX], vertical);
 

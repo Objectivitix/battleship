@@ -18,7 +18,7 @@ describe("Player", () => {
   });
 
   it("places ship on own board horizontally", () => {
-    player.placeNewShip(3, [0, 0], false);
+    player.setShip(3, [0, 0], false);
     expect(player.waters.placeShip).toHaveBeenCalledWith(
       expect.objectContaining({ length: 3 }),
       [
@@ -30,7 +30,7 @@ describe("Player", () => {
   });
 
   it("places ship on own board vertically", () => {
-    player.placeNewShip(3, [0, 0], true);
+    player.setShip(3, [0, 0], true);
     expect(player.waters.placeShip).toHaveBeenCalledWith(
       expect.objectContaining({ length: 3 }),
       [

@@ -26,7 +26,7 @@ describe("Bot", () => {
   it("arranges fleet randomly", () => {
     bot.waters.isValid.mockReturnValue(true);
 
-    bot.arrangeFleet([5, 4, 3, 3, 2]);
+    bot.setShipsRandom([5, 4, 3, 3, 2]);
 
     expect(bot.waters.placeShip).toHaveBeenCalledTimes(5);
     expect(bot.waters.placeShip).toHaveBeenCalledWith(
