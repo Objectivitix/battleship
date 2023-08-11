@@ -1,3 +1,7 @@
+/* FONTS */
+
+@import url("https://fonts.googleapis.com/css2?family=Handjet:wght@400;500;700&family=PT+Sans:wght@400;700&display=swap");
+
 /* RESET */
 
 *,
@@ -29,6 +33,9 @@ button {
 :root {
   font-size: 62.5%;
 
+  --ff-prm: "Handjet", serif;
+  --ff-sec: "PT Sans", sans-serif;
+
   --fs-200: 1.2rem;
   --fs-300: 1.4rem;
   --fs-400: 1.6rem;
@@ -38,17 +45,13 @@ button {
   --fs-800: 2.8rem;
   --fs-900: 3.2rem;
 
-  --fw-lgt: 300;
   --fw-reg: 400;
   --fw-med: 500;
   --fw-bld: 700;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  font-family: var(--ff-prm);
   font-size: var(--fs-400);
 }
 
@@ -62,11 +65,13 @@ button {
   background: none;
 }
 
-/* LOLZ */
+/* GLOBAL */
 
-.game {
+body {
   display: flex;
-  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .grid {
@@ -92,6 +97,50 @@ button {
   border-left-width: 1px;
 }
 
+/* MODAL */
+
+.arrange {
+  padding: 3rem;
+  margin: auto;
+}
+
+.arrange::backdrop {
+  backdrop-filter: blur(4px);
+}
+
+.arrange__wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  width: 45vmin;
+}
+
+.arrange__heading {
+  font-size: 4.5vmin;
+  font-weight: var(--fw-med);
+}
+
+.arrange__rotate {
+  background-color: lightgray;
+  border-radius: 0.5rem;
+  font-family: var(--ff-sec);
+  font-size: 3vmin;
+}
+
+.arrange__grid {
+  grid-column: 1 / -1;
+  aspect-ratio: 1 / 1;
+  width: auto;
+  height: auto;
+}
+
+/* MAIN */
+
+.game {
+  display: flex;
+  gap: 2rem;
+}
+
 .grid__cell--attacked {
   background-color: lightgray;
 }
@@ -99,6 +148,8 @@ button {
 .grid__cell--hit {
   background-color: lightcoral;
 }
+
+/* EXTRAS */
 
 .winner {
   position: absolute;
