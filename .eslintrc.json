@@ -17,7 +17,15 @@
     "sourceType": "module"
   },
   "rules": {
+    "no-await-in-loop": "off",
     "no-constant-condition": "off",
+    "no-param-reassign": "off",
+    "no-restricted-syntax": [
+      "error",
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
     "quotes": ["error", "double"],
     "import/no-extraneous-dependencies": [
       "error",

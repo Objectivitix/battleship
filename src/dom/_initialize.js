@@ -19,11 +19,9 @@ function populateGrids() {
   grids.forEach(populateGrid);
 }
 
-export default function initDocument() {
-  populateGrids();
+populateGrids();
 
-  // Disallow dismissal of arrange fleet input using ESC key
-  arrangeModal.addEventListener("cancel", (evt) => {
-    evt.preventDefault();
-  });
-}
+// Disallow dismissal of arrange fleet input using ESC key
+arrangeModal.addEventListener("cancel", (evt) => {
+  evt.preventDefault();
+});
