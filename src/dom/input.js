@@ -1,11 +1,10 @@
 // Functions to obtain human input.
-// Forgive me, here goes mutable global states
-// implicitly used in functions... (or can I use classes?)
 import { SHIPS } from "../constants";
 
 import { containsEqual } from "../lib/equality";
 
 import Player from "../core/Player";
+import { getGridCell } from "./grid";
 
 class Setup {
   static {
@@ -43,13 +42,30 @@ class Setup {
           JSON.parse(cell.dataset.coords),
           this.vertical,
         );
+
         if (!player.waters.isValid(coordsArr)) {
           cell.dataset.invalid = "invalid";
         }
-      });
 
-      cell.addEventListener("mouseleave", () => {
-        delete cell.dataset.invalid;
+        const modifier = cell.dataset.invalid
+          ? "grid__cell--invalid"
+          : "grid__cell--valid";
+
+        coordsArr.forEach((coords) => {
+          getGridCell(Setup.grid, coords)?.classList.add(modifier);
+        });
+
+        cell.addEventListener(
+          "mouseleave",
+          () => {
+            delete cell.dataset.invalid;
+
+            coordsArr.forEach((coords) => {
+              getGridCell(Setup.grid, coords)?.classList.remove(modifier);
+            });
+          },
+          { once: true },
+        );
       });
     });
 
@@ -76,11 +92,23 @@ class Setup {
         if (evt.target.dataset.invalid) {
           return;
         }
+
+        const coordsArr = Player.calcCoordsArr(
+          self.currShipInfo.length,
+          JSON.parse(evt.target.dataset.coords),
+          self.vertical,
+        );
+
+        coordsArr.forEach((coords) => {
+          getGridCell(Setup.grid, coords)?.classList.add("grid__cell--placed");
+        });
+
         player.setShip(
           self.currShipInfo.length,
           JSON.parse(evt.target.dataset.coords),
           self.vertical,
         );
+
         Setup.grid.removeEventListener("click", awaitValidPlacement);
         resolve();
       });

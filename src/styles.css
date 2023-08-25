@@ -134,6 +134,18 @@ body {
   height: auto;
 }
 
+.grid__cell--placed {
+  background-color: lightblue;
+}
+
+.grid__cell--valid {
+  background-color: lightgreen;
+}
+
+.grid__cell--invalid {
+  background-color: lightcoral;
+}
+
 /* MAIN */
 
 .game {

@@ -21,7 +21,7 @@ function populateGrids() {
 
 populateGrids();
 
-// Disallow dismissal of arrange fleet input using ESC key
+// Disallow dismissal of arrange fleet modal using ESC key
 arrangeModal.addEventListener("cancel", (evt) => {
   evt.preventDefault();
 });
