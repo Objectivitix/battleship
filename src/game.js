@@ -1,8 +1,7 @@
 import { SHIPS } from "./constants";
 
-import { getGridCell } from "./dom/grid";
 import { arrangeHumanFleet, getHumanMove } from "./dom/input";
-import { updateCell } from "./dom/states";
+import { displayFleet, updateCell } from "./dom/states";
 
 import Board from "./core/Board";
 import Bot from "./core/Bot";
@@ -22,7 +21,6 @@ async function arrangeFleet(player) {
     return;
   }
 
-  // player.setShip(5, [0, 0], false);
   await arrangeHumanFleet(player);
 }
 
@@ -36,13 +34,7 @@ export default async function game() {
   await arrangeFleet(playerOne);
   await arrangeFleet(playerTwo);
 
-  for (const coordsArr of playerOne.waters.locations.keys()) {
-    coordsArr.forEach((coords) => {
-      getGridCell(document.querySelector(".grid--one"), coords)?.classList.add(
-        "grid__cell--placed",
-      );
-    });
-  }
+  displayFleet(playerOne);
 
   let playerOneActive = true;
 
