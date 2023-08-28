@@ -2,34 +2,26 @@ import _ from "lodash";
 
 import { BOARD_SL } from "../constants";
 
-import { removeMultiple } from "../lib/equality";
-
 import Player from "./Player";
 
 export default class Bot extends Player {
   setShipsRandom(lengths) {
-    let available = [];
-
-    for (let y = 0; y < BOARD_SL; y += 1) {
-      for (let x = 0; x < BOARD_SL; x += 1) {
-        available.push([y, x]);
-      }
-    }
-
     lengths.forEach((length) => {
       const vertical = Boolean(_.random());
 
-      let start;
-      let coordsArr;
+      const available = [];
 
-      do {
-        start = _.sample(available);
-        coordsArr = Player.calcCoordsArr(length, start, vertical);
-      } while (!this.waters.isValid(coordsArr));
+      for (let y = 0; y < BOARD_SL; y += 1) {
+        for (let x = 0; x < BOARD_SL; x += 1) {
+          const coordsArr = Player.calcCoordsArr(length, [y, x], vertical);
 
-      available = removeMultiple(available, coordsArr);
+          if (this.waters.isValid(coordsArr)) {
+            available.push([y, x]);
+          }
+        }
+      }
 
-      this.setShip(length, start, vertical);
+      this.setShip(length, _.sample(available), vertical);
     });
   }
 
