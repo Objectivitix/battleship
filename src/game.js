@@ -1,11 +1,12 @@
 import { SHIPS } from "./constants";
 
 import { arrangeHumanFleet, getHumanMove } from "./dom/input";
-import { displayFleet, updateCell } from "./dom/states";
+import { displayFleet, displayWinner, updateCell } from "./dom/states";
 
 import Board from "./core/Board";
 import Bot from "./core/Bot";
 import Player from "./core/Player";
+import restart from "./dom/restart";
 
 async function getNextMove(player) {
   if (player instanceof Bot) {
@@ -24,7 +25,7 @@ async function arrangeFleet(player) {
   await arrangeHumanFleet(player);
 }
 
-export default async function game() {
+export async function playRound() {
   const boardOne = new Board();
   const boardTwo = new Board();
 
@@ -51,5 +52,15 @@ export default async function game() {
     }
 
     playerOneActive = !playerOneActive;
+  }
+}
+
+export default async function game() {
+  while (true) {
+    const winner = await playRound();
+
+    displayWinner(winner);
+  
+    await restart();
   }
 }

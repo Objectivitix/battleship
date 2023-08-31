@@ -161,12 +161,25 @@ body {
   background-color: lightcoral;
 }
 
-/* EXTRAS */
+/* END */
 
-.winner {
+.end {
   position: absolute;
   left: 50%;
   bottom: calc(25vmin - 7vh);
   transform: translateX(-50%);
   font-size: var(--fs-800);
+}
+
+.end__restart {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.end__restart:hover {
+  text-decoration: none;
+}
+
+.end__restart:active {
+  text-decoration: underline;
 }
