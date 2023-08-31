@@ -1,6 +1,7 @@
 // Functions to obtain human input.
 import { containsEqual } from "../lib/equality";
 
+import { getEnemyGrid } from "./grid";
 import Setup from "./setup";
 
 export async function arrangeHumanFleet(player) {
@@ -10,7 +11,7 @@ export async function arrangeHumanFleet(player) {
 }
 
 export async function getHumanMove(one, possibleMoves) {
-  const grid = document.querySelector(`.grid--${one ? "two" : "one"}`);
+  const grid = getEnemyGrid(one);
 
   return new Promise((resolve) => {
     grid.addEventListener("click", function awaitValidMove(evt) {

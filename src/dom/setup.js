@@ -3,15 +3,13 @@ import { SHIPS } from "../constants";
 import Player from "../core/Player";
 import { getGridCell } from "./grid";
 
-export default class Setup {
-  static {
-    this.modal = document.querySelector(".arrange");
-    this.heading = document.querySelector(".arrange__heading");
-    this.rotate = document.querySelector(".arrange__rotate");
-    this.grid = document.querySelector(".arrange__grid");
-    this.cells = this.grid.querySelectorAll(".grid__cell");
-  }
+const modal = document.querySelector(".arrange");
+const heading = document.querySelector(".arrange__heading");
+const rotate = document.querySelector(".arrange__rotate");
+const grid = document.querySelector(".arrange__grid");
+const cells = grid.querySelectorAll(".grid__cell");
 
+export default class Setup {
   constructor(player) {
     this.player = player;
 
@@ -21,16 +19,17 @@ export default class Setup {
 
     this.initCellsInfo();
     this.bindRotateButton();
+    cells.forEach(this.bindCellHover.bind(this));
   }
 
   initCellsInfo() {
-    Setup.cells.forEach((cell) => {
+    cells.forEach((cell) => {
       this.cellsInfo.set(cell, { valid: false, cells: null });
     });
   }
 
   resetCellsInfo() {
-    Setup.cells.forEach((cell) => {
+    cells.forEach((cell) => {
       const cellInfo = this.cellsInfo.get(cell);
 
       cellInfo.valid = false;
@@ -39,7 +38,7 @@ export default class Setup {
   }
 
   bindRotateButton() {
-    Setup.rotate.addEventListener("click", () => {
+    rotate.addEventListener("click", () => {
       this.vertical = !this.vertical;
       this.updateCellsInfo();
     });
@@ -75,7 +74,7 @@ export default class Setup {
   updateCellsInfo() {
     this.resetCellsInfo();
 
-    Setup.cells.forEach((cell) => {
+    cells.forEach((cell) => {
       const coordsArr = Player.calcCoordsArr(
         this.currShipInfo.length,
         JSON.parse(cell.dataset.coords),
@@ -87,18 +86,16 @@ export default class Setup {
       }
 
       this.cellsInfo.get(cell).cells = coordsArr
-        .map((coords) => getGridCell(Setup.grid, coords))
+        .map((coords) => getGridCell(grid, coords))
         .filter(Boolean);
     });
   }
 
   async setShips() {
-    Setup.cells.forEach(this.bindCellHover.bind(this));
-
     [this.currShipInfo] = SHIPS;
     this.updateCellsInfo();
 
-    Setup.modal.showModal();
+    modal.showModal();
     await this.setShip();
 
     for (const shipInfo of SHIPS.slice(1)) {
@@ -108,16 +105,16 @@ export default class Setup {
       await this.setShip();
     }
 
-    Setup.modal.close();
+    modal.close();
   }
 
   async setShip() {
-    Setup.heading.textContent = `Player ${
-      this.player.one ? "1" : "2"
-    }, place your ${this.currShipInfo.name}!`;
+    heading.textContent = `Player ${this.player.one ? "1" : "2"}, place your ${
+      this.currShipInfo.name
+    }!`;
 
     return new Promise((resolve) => {
-      Setup.grid.addEventListener(
+      grid.addEventListener(
         "click",
         function awaitValidPlacement(evt) {
           const cellInfo = this.cellsInfo.get(evt.target);
@@ -136,7 +133,7 @@ export default class Setup {
             this.vertical,
           );
 
-          Setup.grid.removeEventListener("click", awaitValidPlacement);
+          grid.removeEventListener("click", awaitValidPlacement);
           resolve();
         }.bind(this),
       );

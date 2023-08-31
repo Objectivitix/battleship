@@ -1,8 +1,8 @@
 // Functions to reflect game states in the DOM.
-import { getGridCell } from "./grid";
+import { getEnemyGrid, getGridCell, getOwnGrid } from "./grid";
 
 export function displayFleet(player) {
-  const grid = document.querySelector(`.grid--${player.one ? "one" : "two"}`);
+  const grid = getOwnGrid(player.one);
 
   player.waters.occupied.forEach((coords) => {
     getGridCell(grid, coords).classList.add("grid__cell--placed");
@@ -10,7 +10,7 @@ export function displayFleet(player) {
 }
 
 export function updateCell(one, coords, hit) {
-  const grid = document.querySelector(`.grid--${one ? "two" : "one"}`);
+  const grid = getEnemyGrid(one);
   const cell = getGridCell(grid, coords);
 
   cell.classList.add(hit ? "grid__cell--hit" : "grid__cell--attacked");
